@@ -1,0 +1,1 @@
+For my Asset Inventory lab project I chose Amado's Pita as the restuarant of choice. It has a dated website and little information about options, pricing, etc. I think this can be significantly improved by adding prices and possible options for sizes.

@@ -1,0 +1,2 @@
+- This is my lab 1 png files, I attempted to create a similar app to TikTok with YouTube infused features aswell
+- For the extra feature I tested out the Planning feature and it allowed me to set priorities from highest to lowest on each individual card

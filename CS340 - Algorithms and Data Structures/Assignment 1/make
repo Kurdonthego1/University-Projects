@@ -1,0 +1,8 @@
+assign1zox610: main.o expression.o
+	g++ -o assign1zox610 main.o expression.o
+
+main.o: main.cpp expression.h
+	g++ -c main.cpp
+
+expression.o: expression.cpp expression.h
+	g++ -c expression.cpp
