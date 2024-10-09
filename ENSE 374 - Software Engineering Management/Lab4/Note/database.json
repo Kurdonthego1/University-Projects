@@ -1,0 +1,23 @@
+[
+    {
+        "note-identifier": "512",
+        "note-creator": "Jon",
+        "note-text": "Greatest HW",
+        "upvote-user": ["Chael","Diaz101"],
+        "downvote-user": ["DC"]
+    },
+    {
+        "note-identifier": "691",
+        "note-creator": "Islam",
+        "note-text": "Goat of LW",
+        "upvote-user": ["Poirier1312","McGregor0412"],
+        "downvote-user": ["Charles1","Arman3912"]
+    },
+    {
+        "note-identifier": "9150",
+        "note-creator": "Lewis",
+        "note-text": "7x WC",
+        "upvote-user": ["To231","20BenzW11"],
+        "downvote-user": ["Vbamg184"]
+    }
+]
