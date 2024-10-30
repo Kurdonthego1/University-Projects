@@ -1,0 +1,3 @@
+g++ -c asn2.cpp
+g++ -c implementation.cpp
+g++ -o assign2zox610 asn2.o implementation.o
