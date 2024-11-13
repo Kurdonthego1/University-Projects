@@ -1,0 +1,32 @@
+<div class="post border rounded p-3 mb-3">
+    <p><strong>Posted by:</strong> <%= post.username %></p>
+    <p><%= post.text %></p>
+    
+    <div class="actions">
+        <!-- Upvote Form -->
+        <form action="/upvote" method="POST" style="display: inline;">
+            <input type="hidden" name="postId" value="<%= post._id %>">
+            <input type="hidden" name="username" value="<%= user.username %>">
+            
+            <!-- Toggle button text based on upvote status -->
+            <button type="submit" class="<%= post.upvotes.includes(user.username) ? 'btn btn-success' : 'btn btn-outline-success' %>">
+                <%= post.upvotes.includes(user.username) ? 'Remove Upvote' : 'Upvote' %>
+            </button>
+        </form>
+        
+        <!-- Downvote Form -->
+        <form action="/downvote" method="POST" style="display: inline;">
+            <input type="hidden" name="postId" value="<%= post._id %>">
+            <input type="hidden" name="username" value="<%= user.username %>">
+            
+            <!-- Toggle button text based on downvote status -->
+            <button type="submit" class="<%= post.downvotes.includes(user.username) ? 'btn btn-danger' : 'btn btn-outline-danger' %>">
+                <%= post.downvotes.includes(user.username) ? 'Remove Downvote' : 'Downvote' %>
+            </button>
+        </form>
+    </div>
+    
+    <div class="vote-count mt-2">
+        <p>Upvotes: <%= post.upvotes.length %> | Downvotes: <%= post.downvotes.length %></p>
+    </div>
+</div>
