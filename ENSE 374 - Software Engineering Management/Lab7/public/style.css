@@ -122,14 +122,14 @@ h1 {
 }
 
 .notebox {
-    text-align: center;
+        text-align: center;
     width: 600px;
     height: auto;
     margin: 50px auto;
     padding-top: 20px;
     padding-bottom: 20px;
     border: 10px;
-    background-color: rgb(5, 134, 240);
+    background-color: rgb(240, 245, 249);
     box-shadow: 0 0 10px 0.1px;
 }
 
@@ -243,3 +243,154 @@ h1 {
 .padding {
     padding-top: 7px;
 }
+
+
+#note-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.lineofinput {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.inputbox {
+    flex: 1;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+
+.up,
+.down,
+.score {
+    padding: 5px;
+    font-size: 14px;
+    width: 40px;
+    text-align: center;
+    border-radius: 3px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.up {
+    border: 1px solid #4CAF50;
+    color: #4CAF50;
+}
+
+.down {
+    border: 1px solid #F44336;
+    color: #F44336;
+}
+
+.upvote-active {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.downvote-active {
+    background-color: #F44336;
+    color: #fff;
+}
+
+.score {
+    border: 1px solid #ddd;
+    color: #555;
+    cursor: default;
+}
+
+.post {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    justify-content: center;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.upvote-button, .downvote-button {
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.upvote-button.active {
+    background-color: #28a745; /* Green color when active */
+    color: white;
+    border-color: #28a745;
+}
+
+.downvote-button.active {
+    background-color: #dc3545; /* Red color when active */
+    color: white;
+    border-color: #dc3545;
+}
+
+.vote-count {
+    font-size: 16px;
+    color: #555;
+}
+
+.post-text {
+    flex: 1;
+    font-size: 16px;
+    color: #333;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.upvote-button, .downvote-button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.upvote-button.active {
+    background-color: #28a745; /* Green color when active */
+    color: white;
+    border-color: #28a745;
+}
+
+.downvote-button.active {
+    background-color: #dc3545; /* Red color when active */
+    color: white;
+    border-color: #dc3545;
+}
+
+.score-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; /* Small box for score */
+    height: 30px;
+    background-color: #eee;
+    color: #333;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Make the text take up the full row and align buttons to the right */
+.d-flex.justify-content-between {
+    width: 100%;
+}
+

@@ -1,32 +1,30 @@
 <div class="post border rounded p-3 mb-3">
-    <p><strong>Posted by:</strong> <%= post.username %></p>
-    <p><%= post.text %></p>
-    
-    <div class="actions">
-        <!-- Upvote Form -->
-        <form action="/upvote" method="POST" style="display: inline;">
-            <input type="hidden" name="postId" value="<%= post._id %>">
-            <input type="hidden" name="username" value="<%= user.username %>">
-            
-            <!-- Toggle button text based on upvote status -->
-            <button type="submit" class="<%= post.upvotes.includes(user.username) ? 'btn btn-success' : 'btn btn-outline-success' %>">
-                <%= post.upvotes.includes(user.username) ? 'Remove Upvote' : 'Upvote' %>
-            </button>
-        </form>
-        
-        <!-- Downvote Form -->
-        <form action="/downvote" method="POST" style="display: inline;">
-            <input type="hidden" name="postId" value="<%= post._id %>">
-            <input type="hidden" name="username" value="<%= user.username %>">
-            
-            <!-- Toggle button text based on downvote status -->
-            <button type="submit" class="<%= post.downvotes.includes(user.username) ? 'btn btn-danger' : 'btn btn-outline-danger' %>">
-                <%= post.downvotes.includes(user.username) ? 'Remove Downvote' : 'Downvote' %>
-            </button>
-        </form>
-    </div>
-    
-    <div class="vote-count mt-2">
-        <p>Upvotes: <%= post.upvotes.length %> | Downvotes: <%= post.downvotes.length %></p>
+    <div class="d-flex justify-content-between align-items-center">
+        <span class="post-text"><%= post.text %></span>
+
+        <div class="actions d-flex align-items-center">
+            <!-- Upvote Form -->
+            <form action="<%= post.upvotes.includes(user) ? '/remove-upvote' : '/upvote' %>" method="POST" style="display: inline;">
+                <input type="hidden" name="postId" value="<%= post._id %>">
+                <input type="hidden" name="username" value="<%= user %>">
+                <button type="submit" class="btn btn-outline-success upvote-button <%= post.upvotes.includes(user) ? 'active' : '' %> me-2">
+                    ↑ <%= post.upvotes.length %>
+                </button>
+            </form>
+
+            <!-- Downvote Form -->
+            <form action="<%= post.downvotes.includes(user) ? '/remove-downvote' : '/downvote' %>" method="POST" style="display: inline;">
+                <input type="hidden" name="postId" value="<%= post._id %>">
+                <input type="hidden" name="username" value="<%= user %>">
+                <button type="submit" class="btn btn-outline-danger downvote-button <%= post.downvotes.includes(user) ? 'active' : '' %> me-2">
+                    ↓ <%= post.downvotes.length %>
+                </button>
+            </form>
+
+            <!-- Score Box -->
+            <div class="score-box ms-2">
+                <%= post.upvotes.length - post.downvotes.length %>
+            </div>
+        </div>
     </div>
 </div>

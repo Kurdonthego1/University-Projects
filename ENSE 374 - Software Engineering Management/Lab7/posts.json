@@ -1,54 +1,62 @@
 [
   {
     "_id": 1,
-    "text": "ghj",
-    "creator": "a@a.a",
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 2,
-    "text": "123",
+    "text": "New",
     "creator": {
-      "username": "a@a.a"
+      "username": "b@b.b"
     },
     "upvotes": [
-      ""
+      "a@a.a"
     ],
     "downvotes": []
   },
   {
-    "_id": 3,
-    "text": "312",
+    "_id": 2,
+    "text": "muhammad is ass",
     "creator": {
       "username": "a@a.a"
     },
     "upvotes": [],
     "downvotes": [
-      ""
+      "b@b.b"
     ]
   },
   {
+    "_id": 3,
+    "text": "Yuval is a gay ass man",
+    "creator": {
+      "username": "a@a.a"
+    },
+    "upvotes": [
+      "b@b.b"
+    ],
+    "downvotes": []
+  },
+  {
     "_id": 4,
-    "text": "132213123",
+    "text": "Nathan is big ",
     "creator": {
       "username": "a@a.a"
     },
     "upvotes": [],
-    "downvotes": []
+    "downvotes": [
+      "b@b.b"
+    ]
   },
   {
     "_id": 5,
-    "text": "asd",
+    "text": "Yuval is sleepy af",
     "creator": {
       "username": "a@a.a"
     },
     "upvotes": [],
-    "downvotes": []
+    "downvotes": [
+      "b@b.b"
+    ]
   },
   {
     "_id": 6,
-    "text": "123123",
+    "text": "Yuval is an absolute fatass kid",
     "creator": {
       "username": "a@a.a"
     },
@@ -57,276 +65,11 @@
   },
   {
     "_id": 7,
-    "text": "aaaaaaaaaaa",
+    "text": "Yuval is an absolute fatass",
     "creator": {
       "username": "a@a.a"
     },
     "upvotes": [],
     "downvotes": []
-  },
-  {
-    "_id": 8,
-    "text": "asd",
-    "creator": {
-      "username": "a@a.a"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 9,
-    "text": "12312313",
-    "creator": {
-      "username": "a@a.a"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 10,
-    "text": "asd",
-    "creator": {
-      "username": "a@a.a"
-    },
-    "upvotes": [],
-    "downvotes": [
-      ""
-    ]
-  },
-  {
-    "_id": 11,
-    "text": "123",
-    "creator": {
-      "username": "a@a.a"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 12,
-    "text": "123",
-    "creator": {
-      "username": "a@a.a"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 13,
-    "text": "123",
-    "creator": {
-      "username": "a@a.a"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 14,
-    "text": "123",
-    "creator": {
-      "username": "a@a.a"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 15,
-    "text": "123123",
-    "creator": {
-      "username": "b@b.b"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 16,
-    "text": "123123",
-    "creator": {
-      "username": "a@a.a"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 17,
-    "text": "123",
-    "creator": {
-      "username": "b@b.b"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 18,
-    "text": "asd",
-    "creator": {
-      "username": "b@b.b"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 19,
-    "text": "",
-    "creator": {
-      "username": "b@b.b"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 20,
-    "text": "31231231231",
-    "creator": {
-      "username": "a@a.a"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 21,
-    "text": "123123123123",
-    "creator": {
-      "username": "a@a.a"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 22,
-    "text": "asd123",
-    "creator": {
-      "username": "a@a.a"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 23,
-    "text": "Harry suck",
-    "creator": {
-      "username": "a@a.a"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 24,
-    "text": "123",
-    "creator": {
-      "username": "a@a.a"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 25,
-    "text": "dsa",
-    "creator": {
-      "username": "a@a.a"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 26,
-    "text": "123",
-    "creator": {
-      "username": "a@a.a"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 27,
-    "text": "",
-    "creator": {
-      "username": "a@a.a"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 28,
-    "text": "asdasdsadN",
-    "creator": {
-      "username": "a@a.a"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 29,
-    "text": "asd",
-    "creator": {
-      "username": "b@b.b"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 30,
-    "text": "",
-    "creator": {
-      "username": "b@b.b"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 31,
-    "text": "",
-    "creator": {
-      "username": "b@b.b"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 32,
-    "text": "",
-    "creator": {
-      "username": "b@b.b"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 33,
-    "text": "",
-    "creator": {
-      "username": "b@b.b"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 34,
-    "text": "",
-    "creator": {
-      "username": "b@b.b"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 35,
-    "text": "",
-    "creator": {
-      "username": "b@b.b"
-    },
-    "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 36,
-    "text": "123",
-    "creator": {
-      "username": ""
-    },
-    "upvotes": [],
-    "downvotes": [
-      ""
-    ]
   }
 ]

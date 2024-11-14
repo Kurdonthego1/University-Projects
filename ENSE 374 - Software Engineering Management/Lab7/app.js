@@ -5,7 +5,6 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
@@ -36,30 +35,48 @@ function loadUsers() {
     }
 }
 
+// Helper function to save users to JSON file
+function saveUsers(users) {
+    fs.writeFileSync('users.json', JSON.stringify(users, null, 2), 'utf8');
+}
+
 // Route to serve the login page
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-app.post('/note-vote', (req, res) => {
-    const posts = loadPosts();
-    const username = req.body.username || req.query.username; // Retrieve username from the request body or query
-    res.render('notevote', { username, posts });
+app.get('/logout', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-// POST route to handle login
+// POST route to handle login and registration
 app.post('/login', (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, invitecode } = req.body;
     const users = loadUsers();
-    const user = users.find(u => u.username === username && u.password === password);
 
-    if (user) {
-        res.render('notevote', { username, posts: loadPosts() });  // Render directly with username and posts
+    // Check if the request is for registration (invitecode field is filled)
+    if (invitecode) {
+        // Registration process
+        if (invitecode === "code") { // Verify invite code
+            // Add the new user
+            const newUser = { username, password };
+            users.push(newUser);
+            saveUsers(users); // Save the updated user list to users.json
+            res.redirect('/notevote', { username, posts: loadPosts() }); // Redirect to login page after successful registration
+        } else {
+            res.redirect('/'); // Incorrect invite code, redirect to login page
+        }
     } else {
-        res.redirect('/');  // Redirect back to login on failure
+        // Login process
+        const user = users.find(u => u.username === username && u.password === password);
+
+        if (user) {
+            res.render('notevote', { username, posts: loadPosts() });
+        } else {
+            res.redirect('/');
+        }
     }
 });
-
 
 // POST route to add a new post
 app.post('/addpost', (req, res) => {
@@ -76,28 +93,23 @@ app.post('/addpost', (req, res) => {
 
     posts.push(newPost);
     savePosts(posts);
-    res.render('notevote', { username, posts }); // Render directly with username and posts
+    res.render('notevote', { username, posts });
 });
-
 
 // Route to handle upvoting a post
 app.post('/upvote', (req, res) => {
-    const { postId } = req.body;
-    const { username } = req.body;
+    const { postId, username } = req.body;
     const posts = loadPosts();
 
     const post = posts.find(p => p._id === parseInt(postId));
-    if (post) {
-        // Remove user from downvotes if present and add to upvotes if not already there
+    if (post && post.creator.username !== username) {  // Ensure the user is not the post creator
         post.downvotes = post.downvotes.filter(user => user !== username);
         if (!post.upvotes.includes(username)) {
             post.upvotes.push(username);
         }
+        savePosts(posts);
     }
-
-    savePosts(posts);
     res.redirect(307, `/note-vote?username=${username}`);
-
 });
 
 // Route to handle removing an upvote
@@ -108,11 +120,9 @@ app.post('/remove-upvote', (req, res) => {
     const post = posts.find(p => p._id === parseInt(postId));
     if (post) {
         post.upvotes = post.upvotes.filter(user => user !== username);
+        savePosts(posts);
     }
-
-    savePosts(posts);
     res.redirect(307, `/note-vote?username=${username}`);
-
 });
 
 // Route to handle downvoting a post
@@ -121,17 +131,14 @@ app.post('/downvote', (req, res) => {
     const posts = loadPosts();
 
     const post = posts.find(p => p._id === parseInt(postId));
-    if (post) {
-        // Remove user from upvotes if present and add to downvotes if not already there
+    if (post && post.creator.username !== username) {  // Ensure the user is not the post creator
         post.upvotes = post.upvotes.filter(user => user !== username);
         if (!post.downvotes.includes(username)) {
             post.downvotes.push(username);
         }
+        savePosts(posts);
     }
-
-    savePosts(posts);
     res.redirect(307, `/note-vote?username=${username}`);
-
 });
 
 // Route to handle removing a downvote
@@ -142,11 +149,9 @@ app.post('/remove-downvote', (req, res) => {
     const post = posts.find(p => p._id === parseInt(postId));
     if (post) {
         post.downvotes = post.downvotes.filter(user => user !== username);
+        savePosts(posts);
     }
-
-    savePosts(posts);
     res.redirect(307, `/note-vote?username=${username}`);
-
 });
 
 // Start the server

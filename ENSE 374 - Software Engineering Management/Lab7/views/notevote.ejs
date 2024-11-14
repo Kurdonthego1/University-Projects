@@ -21,11 +21,13 @@
     </div>
 </div>
 
-<% posts.forEach(post => { %>
-    <div class="notebox" id="note-container">
-        <%- include("partials/post", { post: post, user: username }) %>
-    </div>
-<% }) %>
+<div class="notebox" id="note-main">
+    <% posts.forEach(post => { %>
+        <div id="note-container">
+                <%- include("partials/post", { post: post, user: username }) %>
+        </div>
+    <% }) %>
+</div>
 
 <div class="newadd">
     <form action="/addpost" method="POST">
