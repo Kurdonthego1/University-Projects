@@ -5,39 +5,31 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
-// Helper function to load posts from JSON file
-function loadPosts() {
-    try {
-        const data = fs.readFileSync('posts.json', 'utf8');
-        return JSON.parse(data);
-    } catch (err) {
-        console.error('Error reading posts JSON file:', err);
-        return [];
-    }
+// Load posts from JSON file
+let posts = [];
+try {
+    const data = fs.readFileSync('posts.json', 'utf8');
+    posts = JSON.parse(data);
+} catch (err) {
+    console.error('Error reading posts JSON file:', err);
 }
 
-// Helper function to save posts to JSON file
-function savePosts(posts) {
+// Load users from JSON file
+let users = [];
+try {
+    const data = fs.readFileSync('users.json', 'utf8');
+    users = JSON.parse(data);
+} catch (err) {
+    console.error('Error reading users JSON file:', err);
+}
+
+// Function to save posts to JSON file
+function savePosts() {
     fs.writeFileSync('posts.json', JSON.stringify(posts, null, 2), 'utf8');
-}
-
-// Helper function to load users from JSON file
-function loadUsers() {
-    try {
-        const data = fs.readFileSync('users.json', 'utf8');
-        return JSON.parse(data);
-    } catch (err) {
-        console.error('Error reading users JSON file:', err);
-        return [];
-    }
-}
-
-// Helper function to save users to JSON file
-function saveUsers(users) {
-    fs.writeFileSync('users.json', JSON.stringify(users, null, 2), 'utf8');
 }
 
 // Route to serve the login page
@@ -45,43 +37,43 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-app.get('/logout', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+// Logout route
+app.post('/logout', (req, res) => {
+    res.redirect('/');
 });
 
-// POST route to handle login and registration
+app.post('/note-vote', (req, res) => {
+    const username = req.body.username || req.query.username;
+    if (!username) {
+        return res.redirect('/');
+    }
+    res.render('notevote', { username, posts });
+});
+
+// POST route to handle login
 app.post('/login', (req, res) => {
-    const { username, password, invitecode } = req.body;
-    const users = loadUsers();
+    const username = req.body.username;
+    const password = req.body.password;
+    let user = null;
 
-    // Check if the request is for registration (invitecode field is filled)
-    if (invitecode) {
-        // Registration process
-        if (invitecode === "code") { // Verify invite code
-            // Add the new user
-            const newUser = { username, password };
-            users.push(newUser);
-            saveUsers(users); // Save the updated user list to users.json
-            res.redirect('/notevote', { username, posts: loadPosts() }); // Redirect to login page after successful registration
-        } else {
-            res.redirect('/'); // Incorrect invite code, redirect to login page
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].username === username && users[i].password === password) {
+            user = users[i];
+            break;
         }
+    }
+
+    if (user) {
+        res.render('notevote', { username, posts });
     } else {
-        // Login process
-        const user = users.find(u => u.username === username && u.password === password);
-
-        if (user) {
-            res.render('notevote', { username, posts: loadPosts() });
-        } else {
-            res.redirect('/');
-        }
+        res.redirect('/');
     }
 });
 
 // POST route to add a new post
 app.post('/addpost', (req, res) => {
-    const { username, text } = req.body;
-    const posts = loadPosts();
+    const username = req.body.username;
+    const text = req.body.text;
 
     const newPost = {
         _id: posts.length + 1,
@@ -92,65 +84,93 @@ app.post('/addpost', (req, res) => {
     };
 
     posts.push(newPost);
-    savePosts(posts);
+    savePosts();
     res.render('notevote', { username, posts });
 });
 
 // Route to handle upvoting a post
 app.post('/upvote', (req, res) => {
-    const { postId, username } = req.body;
-    const posts = loadPosts();
+    const postId = parseInt(req.body.postId);
+    const username = req.body.username;
 
-    const post = posts.find(p => p._id === parseInt(postId));
-    if (post && post.creator.username !== username) {  // Ensure the user is not the post creator
-        post.downvotes = post.downvotes.filter(user => user !== username);
-        if (!post.upvotes.includes(username)) {
-            post.upvotes.push(username);
+    for (let i = 0; i < posts.length; i++) {
+        if (posts[i]._id === postId && posts[i].creator.username !== username) {
+            let upvoteIndex = posts[i].upvotes.indexOf(username);
+            let downvoteIndex = posts[i].downvotes.indexOf(username);
+
+            if (downvoteIndex !== -1) {
+                posts[i].downvotes.splice(downvoteIndex, 1);
+            }
+            if (upvoteIndex === -1) {
+                posts[i].upvotes.push(username);
+            }
+            break;
         }
-        savePosts(posts);
     }
+
+    savePosts();
     res.redirect(307, `/note-vote?username=${username}`);
 });
 
 // Route to handle removing an upvote
 app.post('/remove-upvote', (req, res) => {
-    const { postId, username } = req.body;
-    const posts = loadPosts();
+    const postId = parseInt(req.body.postId);
+    const username = req.body.username;
 
-    const post = posts.find(p => p._id === parseInt(postId));
-    if (post) {
-        post.upvotes = post.upvotes.filter(user => user !== username);
-        savePosts(posts);
+    for (let i = 0; i < posts.length; i++) {
+        if (posts[i]._id === postId) {
+            let upvoteIndex = posts[i].upvotes.indexOf(username);
+            if (upvoteIndex !== -1) {
+                posts[i].upvotes.splice(upvoteIndex, 1);
+            }
+            break;
+        }
     }
+
+    savePosts();
     res.redirect(307, `/note-vote?username=${username}`);
 });
 
 // Route to handle downvoting a post
 app.post('/downvote', (req, res) => {
-    const { postId, username } = req.body;
-    const posts = loadPosts();
+    const postId = parseInt(req.body.postId);
+    const username = req.body.username;
 
-    const post = posts.find(p => p._id === parseInt(postId));
-    if (post && post.creator.username !== username) {  // Ensure the user is not the post creator
-        post.upvotes = post.upvotes.filter(user => user !== username);
-        if (!post.downvotes.includes(username)) {
-            post.downvotes.push(username);
+    for (let i = 0; i < posts.length; i++) {
+        if (posts[i]._id === postId && posts[i].creator.username !== username) {
+            let upvoteIndex = posts[i].upvotes.indexOf(username);
+            let downvoteIndex = posts[i].downvotes.indexOf(username);
+
+            if (upvoteIndex !== -1) {
+                posts[i].upvotes.splice(upvoteIndex, 1);
+            }
+            if (downvoteIndex === -1) {
+                posts[i].downvotes.push(username);
+            }
+            break;
         }
-        savePosts(posts);
     }
+
+    savePosts();
     res.redirect(307, `/note-vote?username=${username}`);
 });
 
 // Route to handle removing a downvote
 app.post('/remove-downvote', (req, res) => {
-    const { postId, username } = req.body;
-    const posts = loadPosts();
+    const postId = parseInt(req.body.postId);
+    const username = req.body.username;
 
-    const post = posts.find(p => p._id === parseInt(postId));
-    if (post) {
-        post.downvotes = post.downvotes.filter(user => user !== username);
-        savePosts(posts);
+    for (let i = 0; i < posts.length; i++) {
+        if (posts[i]._id === postId) {
+            let downvoteIndex = posts[i].downvotes.indexOf(username);
+            if (downvoteIndex !== -1) {
+                posts[i].downvotes.splice(downvoteIndex, 1);
+            }
+            break;
+        }
     }
+
+    savePosts();
     res.redirect(307, `/note-vote?username=${username}`);
 });
 

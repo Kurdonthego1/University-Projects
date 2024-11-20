@@ -1,7 +1,16 @@
 [
   {
     "_id": 1,
-    "text": "New",
+    "text": "asd",
+    "creator": {
+      "username": "b@b.b"
+    },
+    "upvotes": [],
+    "downvotes": []
+  },
+  {
+    "_id": 2,
+    "text": "dsa123",
     "creator": {
       "username": "b@b.b"
     },
@@ -11,30 +20,19 @@
     "downvotes": []
   },
   {
-    "_id": 2,
-    "text": "muhammad is ass",
+    "_id": 3,
+    "text": "13212",
     "creator": {
-      "username": "a@a.a"
+      "username": "b@b.b"
     },
     "upvotes": [],
     "downvotes": [
-      "b@b.b"
+      "a@a.a"
     ]
   },
   {
-    "_id": 3,
-    "text": "Yuval is a gay ass man",
-    "creator": {
-      "username": "a@a.a"
-    },
-    "upvotes": [
-      "b@b.b"
-    ],
-    "downvotes": []
-  },
-  {
     "_id": 4,
-    "text": "Nathan is big ",
+    "text": "asd",
     "creator": {
       "username": "a@a.a"
     },
@@ -45,7 +43,29 @@
   },
   {
     "_id": 5,
-    "text": "Yuval is sleepy af",
+    "text": "12312",
+    "creator": {
+      "username": "a@a.a"
+    },
+    "upvotes": [
+      "b@b.b"
+    ],
+    "downvotes": []
+  },
+  {
+    "_id": 6,
+    "text": "sdas",
+    "creator": {
+      "username": "a@a.a"
+    },
+    "upvotes": [
+      "b@b.b"
+    ],
+    "downvotes": []
+  },
+  {
+    "_id": 7,
+    "text": "asd",
     "creator": {
       "username": "a@a.a"
     },
@@ -55,21 +75,14 @@
     ]
   },
   {
-    "_id": 6,
-    "text": "Yuval is an absolute fatass kid",
+    "_id": 8,
+    "text": "sd",
     "creator": {
       "username": "a@a.a"
     },
     "upvotes": [],
-    "downvotes": []
-  },
-  {
-    "_id": 7,
-    "text": "Yuval is an absolute fatass",
-    "creator": {
-      "username": "a@a.a"
-    },
-    "upvotes": [],
-    "downvotes": []
+    "downvotes": [
+      "b@b.b"
+    ]
   }
 ]

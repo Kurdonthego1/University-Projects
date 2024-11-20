@@ -1,0 +1,54 @@
+<%- include('header') %>
+<h1>Note-Vote</h1>
+<div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Log In
+            </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+            <h2>Log in</h2>
+            <form action="/login" method="POST">
+                <label for="email">Email address</label>
+                <input type="text" name="username" placeholder="Email address" class="textbox" id="emailtext" required>
+                <br>
+                <label for="pword">Password</label>
+                <br>
+                <input type="password" name="password" placeholder="Password" class="textbox" required>
+                <br>
+                <input type="submit" value="Log In" class="inputbuttons">
+            </form>
+        </div>
+    </div>
+    <!-- Registration form as per your login.html -->
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Register
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <h2>
+                    <p id="signuptext">Sign up</p>
+                </h2>
+                <form action="/login" method="POST">
+                    <div class="signfo">
+                        <label for="email">Email address</label>
+                        <input type="text" name="username" placeholder="Email address" class="textbox">
+                        <br>
+                        <label for="pword">Password</label>
+                        <input type="text" name="password" placeholder="Password" class="textbox">
+                        <br>
+                        <label for="invcode">Invite Code</label> 
+                        <input type="text" name="invitecode" placeholder="Invite Code" class="textbox">
+                        <br>
+                        <input type="submit" value="Sign Up" class="inputbuttons">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('footer') %>

@@ -1,0 +1,30 @@
+<div class="post border rounded p-3 mb-3">
+    <div class="d-flex justify-content-between align-items-center">
+        <span class="post-text"><%= post.text %></span>
+
+        <div class="actions d-flex align-items-center">
+            <!-- Upvote Form -->
+            <form action="<%= post.upvotes.includes(user) ? '/remove-upvote' : '/upvote' %>" method="POST" style="display: inline;">
+                <input type="hidden" name="postId" value="<%= post._id %>">
+                <input type="hidden" name="username" value="<%= user %>">
+                <button type="submit" class="btn btn-outline-success upvote-button <%= post.upvotes.includes(user) ? 'active' : '' %> me-2">
+                    ↑ <%= post.upvotes.length %>
+                </button>
+            </form>
+
+            <!-- Downvote Form -->
+            <form action="<%= post.downvotes.includes(user) ? '/remove-downvote' : '/downvote' %>" method="POST" style="display: inline;">
+                <input type="hidden" name="postId" value="<%= post._id %>">
+                <input type="hidden" name="username" value="<%= user %>">
+                <button type="submit" class="btn btn-outline-danger downvote-button <%= post.downvotes.includes(user) ? 'active' : '' %> me-2">
+                    ↓ <%= post.downvotes.length %>
+                </button>
+            </form>
+
+            <!-- Score Box -->
+            <div class="score-box ms-2">
+                <%= post.upvotes.length - post.downvotes.length %>
+            </div>
+        </div>
+    </div>
+</div>
