@@ -2,6 +2,10 @@
   "dependencies": {
     "ejs": "^3.1.10",
     "express": "^4.21.1",
+<<<<<<< HEAD
     "node": "^18.20.5"
+=======
+    "mongoose": "^8.8.1"
+>>>>>>> 478b5c23ad50f7af7c39f0b74b0c0b2b8535f291
   }
 }
