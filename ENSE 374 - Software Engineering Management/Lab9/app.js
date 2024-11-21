@@ -27,6 +27,11 @@ try {
     console.error('Error reading users JSON file:', err);
 }
 
+// Function to save users to JSON file
+function saveUsers() {
+    fs.writeFileSync('users.json', JSON.stringify(users, null, 2), 'utf8');
+}
+
 // Function to save posts to JSON file
 function savePosts() {
     fs.writeFileSync('posts.json', JSON.stringify(posts, null, 2), 'utf8');
@@ -68,6 +73,35 @@ app.post('/login', (req, res) => {
     } else {
         res.redirect('/');
     }
+});
+
+
+// POST route to handle user registration
+app.post("/register", (req, res) => {
+    const { username, password, invitecode } = req.body;
+
+    if (invitecode !== "code") {
+        return res.redirect("/");
+    }
+
+    // Check if user already exists
+    const existingUser = users.find(user => user.username === username);
+    if (existingUser) {
+        console.log("User already exists");
+        return res.redirect("/"); // Redirect to login if user exists
+    }
+
+    // Add new user to the users array
+    const newUser = { username, password };
+    users.push(newUser);
+
+    // Save users to file
+    saveUsers();
+
+    console.log("New user registered:", newUser);
+
+    // Redirect to login page after successful registration
+    res.redirect("/");
 });
 
 // POST route to add a new post
