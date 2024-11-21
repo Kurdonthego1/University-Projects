@@ -14,7 +14,9 @@
     "creator": {
       "username": "b@b.b"
     },
-    "upvotes": [],
+    "upvotes": [
+      "testing123"
+    ],
     "downvotes": [
       "a@a.a"
     ]
@@ -27,7 +29,8 @@
     },
     "upvotes": [],
     "downvotes": [
-      "a@a.a"
+      "a@a.a",
+      "testing123"
     ]
   },
   {
@@ -38,7 +41,8 @@
     },
     "upvotes": [],
     "downvotes": [
-      "b@b.b"
+      "b@b.b",
+      "testing123"
     ]
   },
   {
@@ -47,7 +51,9 @@
     "creator": {
       "username": "a@a.a"
     },
-    "upvotes": [],
+    "upvotes": [
+      "testing123"
+    ],
     "downvotes": [
       "b@b.b"
     ]
@@ -70,7 +76,8 @@
       "username": "a@a.a"
     },
     "upvotes": [
-      "b@b.b"
+      "b@b.b",
+      "demo"
     ],
     "downvotes": []
   },
@@ -82,7 +89,8 @@
     },
     "upvotes": [],
     "downvotes": [
-      "b@b.b"
+      "b@b.b",
+      "demo"
     ]
   },
   {
@@ -92,7 +100,8 @@
       "username": "a@a.a"
     },
     "upvotes": [
-      "b@b.b"
+      "b@b.b",
+      "demo"
     ],
     "downvotes": []
   },
@@ -105,6 +114,28 @@
     "upvotes": [
       "b@b.b"
     ],
+    "downvotes": [
+      "demo"
+    ]
+  },
+  {
+    "_id": 11,
+    "text": "Cooked",
+    "creator": {
+      "username": "testing123"
+    },
+    "upvotes": [
+      "demo"
+    ],
+    "downvotes": []
+  },
+  {
+    "_id": 12,
+    "text": "COOKED",
+    "creator": {
+      "username": "demo"
+    },
+    "upvotes": [],
     "downvotes": []
   }
 ]
