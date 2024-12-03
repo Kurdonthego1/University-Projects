@@ -9,6 +9,26 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/test');
+
+// User Schema with validation
+const userSchema = new mongoose.Schema({
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+});
+
+const Users = mongoose.model("User", userSchema);
+
+const postSchema = new mongoose.Schema({
+    text: {type: String},
+    user: userSchema,
+    upvotes: [userSchema],
+    downvotes: [userSchema]
+});
+
+const Posts = mongoose.model("Post", postSchema);
+
 // Load posts from JSON file
 let posts = [];
 try {
@@ -55,53 +75,51 @@ app.post('/note-vote', (req, res) => {
     res.render('notevote', { username, posts });
 });
 
-// POST route to handle login
-app.post('/login', (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
-    let user = null;
+app.post('/register', async (req, res) => {
+    const { usernamereg, passwordreg, invitecodereg } = req.body;
 
-    for (let i = 0; i < users.length; i++) {
-        if (users[i].username === username && users[i].password === password) {
-            user = users[i];
-            break;
-        }
+    if (invitecodereg !== "code") {
+        console.log("Invalid invite code");
+        return res.redirect('/');
     }
 
-    if (user) {
-        res.render('notevote', { username, posts });
-    } else {
+    try {
+        const existingUser = await Users.findOne({ username: usernamereg });
+        if (existingUser) {
+            console.log("User already exists");
+            return res.redirect('/');
+        }
+
+        const newUser = new Users({ username: usernamereg, password: passwordreg });
+        await newUser.save();
+        console.log("New user registered:", usernamereg);
+
         res.redirect('/');
+    } catch (error) {
+        console.error("Error registering user:", error);
+        res.status(500).send("Internal Server Error");
     }
 });
 
 
-// POST route to handle user registration
-app.post("/register", (req, res) => {
-    const { username, password, invitecode } = req.body;
+// Handle login
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
 
-    if (invitecode !== "code") {
-        return res.redirect("/");
+    try {
+        // Validate user credentials
+        const user = await Users.findOne({ username, password });
+        if (user) {
+            console.log("Login successful for user:", username);
+            res.render('notevote', { username, posts });
+        } else {
+            console.log("Invalid username or password");
+            res.redirect('/');
+        }
+    } catch (error) {
+        console.error("Error during login:", error);
+        res.status(500).send("Internal Server Error");
     }
-
-    // Check if user already exists
-    const existingUser = users.find(user => user.username === username);
-    if (existingUser) {
-        console.log("User already exists");
-        return res.redirect("/"); // Redirect to login if user exists
-    }
-
-    // Add new user to the users array
-    const newUser = { username, password };
-    users.push(newUser);
-
-    // Save users to file
-    saveUsers();
-
-    console.log("New user registered:", newUser);
-
-    // Redirect to login page after successful registration
-    res.redirect("/");
 });
 
 // POST route to add a new post
@@ -208,24 +226,6 @@ app.post('/remove-downvote', (req, res) => {
     res.redirect(307, `/note-vote?username=${username}`);
 });
 
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/test');
-
-const userSchema = new mongoose.userSchema({
-    username: String,
-    password: String
-});
-
-const Users = mongoose.model("Users", userSchema);
-
-const postsSchema = new mongoose.Schema({
-    text: String,
-    user: userSchema,
-    upvotes: [userSchema],
-    downvotes: [userSchema]
-});
-
-const Posts = mongoose.model("Posts", postsSchema);
 
 // Start the server
 app.listen(PORT, () => {
