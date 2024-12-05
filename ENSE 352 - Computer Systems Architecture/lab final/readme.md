@@ -28,7 +28,7 @@ Simon was recreated using:
 
 Project was compiled and built in C using Keil Vision.
 
-In order to initiate the game the above mentioned components must follow the [schematic]("")
+In order to initiate the game the above mentioned components must follow the [schematic]("https://github.com/Kurdonthego1/University-Projects/blob/main/ENSE%20352%20-%20Computer%20Systems%20Architecture/lab%20final/Simon%20Game%20Schematic.pdf")
 
 ### **How to play?**
 
