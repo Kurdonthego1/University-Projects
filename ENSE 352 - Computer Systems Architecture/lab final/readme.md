@@ -14,7 +14,7 @@ As each round progresses you must remember the sequence before and add the new b
 
 In order to win you must complete 10 rounds without failure, one wrong input will result in failure.
 
-[Demonstration and Showcase]("https://www.youtube.com/watch?v=5D9F1n3j_YY")
+[Demonstration and Showcase](https://www.youtube.com/watch?v=5D9F1n3j_YY)
 
 ### **STM and Breadboard:**
 
@@ -28,14 +28,14 @@ Simon was recreated using:
 
 Project was compiled and built in C using Keil Vision.
 
-In order to initiate the game the above mentioned components must follow the [schematic]("https://github.com/Kurdonthego1/University-Projects/blob/main/ENSE%20352%20-%20Computer%20Systems%20Architecture/lab%20final/Simon%20Game%20Schematic.pdf")
+In order to initiate the game the above mentioned components must follow the [schematic](https://github.com/Kurdonthego1/University-Projects/blob/main/ENSE%20352%20-%20Computer%20Systems%20Architecture/lab%20final/Simon%20Game%20Schematic.pdf)
 
 ### **How to play?**
 
 After the circuit is built and the file, main.c, is loaded on you may initiate the game.
 
 **Starting:**
-- Starting sequence imitates the [Knight Rider]("https://youtu.be/oNyXYPhnUIs?si=Uq93w3tZsj_MqU3o&t=9") LED sequence.- At this point, any input from the 4 buttons will start the game
+- Starting sequence imitates the [Knight Rider](https://youtu.be/oNyXYPhnUIs?si=Uq93w3tZsj_MqU3o&t=9) LED sequence.- At this point, any input from the 4 buttons will start the game
 - From there you must follow the pattern and input what Simon Says
 
 **Winning:**
